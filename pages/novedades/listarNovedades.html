@@ -31,12 +31,16 @@
                             <th>Descripción</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            <td>11-7-2014</td>
-                            <td>John Doe</td>
-                            <td>Jejeje</td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            <td><td><button type="button" class="btn btn-danger btn-sm">x</button></td></td>
+                        <tr ng-repeat="d in novedades">
+                            <td style="vertical-align: middle">{{d.fechapublicacion}}</td>
+                            <td style="vertical-align: middle">{{d.usuario}}</td>
+                            <td style="vertical-align: middle">{{d.titulo}}</td>
+                            <td style="vertical-align: middle">{{d.descripcion}}</td>
+                            <td style="vertical-align: middle">
+                                <button class="btn btn-sm btn-danger" style="border-radius: 999px">
+                                    <i class="ion-close" aria-hidden="true"></i>
+                                </button>
+                            </td>
                         </tr>
                     </table>
                 </div>
