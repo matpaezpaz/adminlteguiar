@@ -16,14 +16,14 @@
           <div class="small-box bg-aqua">
             <div class="inner">
               <!-- $%# Cantidad de visitas del día de hoy -->
-              <h3>#</h3>
+              <h3>{{visitasDiarias}}</h3>
               <p>Visitas diarias</p>
             </div>
             <div class="icon">
               <i class="ion ion-clock"></i>
             </div>
             <!-- $%# Fecha de hoy -->
-            <p class="small-box-footer">## de Diciembre de 2017</p>
+            <p class="small-box-footer">{{fechaHoy}} de Diciembre de 2017</p>
           </div>
         </div>
         <!-- Números iniciales - Nuevos usuarios -->
@@ -32,7 +32,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <!-- $%# Cantidad de nuevos usuarios en los últimos 30 días -->
-              <h3>#</h3>
+              <h3>{{nuevosUsuario}}</h3>
               <p>Nuevos Usuarios</p>
             </div>
             <div class="icon">
@@ -47,7 +47,7 @@
           <div class="small-box bg-red">
             <div class="inner">
               <!-- $%# Cantidad de visitas en el mes actual -->
-              <h3>##</h3>
+              <h3>{{visitasestemes}}</h3>
               <p>Visitas este mes</p>
             </div>
             <div class="icon">
@@ -187,9 +187,8 @@
     <!-- /.content -->
 
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
