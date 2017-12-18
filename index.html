@@ -62,44 +62,22 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <!-- $%# Cantidad de notificaciones a mostrar -->
-              <span class="label label-warning">#</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- $%# Cantidad de notificaciones a mostrar -->
-              <li class="header">Tiene # notificaciones</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <!-- $%# Cantidad de notificaciones a mostrar -->
-                      <i class="fa fa-users text-aqua"></i> # nuevos miembros se unieron hoy
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="userimage.jpg" class="user-image" alt="User Image">
               <!-- $%# Nombre del Usuario -->
-              <span class="hidden-xs">Nombre del Usuario</span>
+              <span class="hidden-xs">UTN - FRT</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="userimage.jpg" class="img-circle" alt="User Image">
                 <p>
                   <!-- $%# Nombre del Usuario - Perfil o Rol en la página -->
-                  Alexander Pierce - Web Developer
+                  UTN - FRT <i>Administrador</i>
                   <!-- $%# Fecha de creación del usuario -->
-                  <small>Member since Nov. 2012</small>
+                  <small>Miembro desde Diciembre 2017</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -111,9 +89,6 @@
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
         </ul>
       </div>
     </nav>
@@ -125,11 +100,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="userimage.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <!-- $%# Nombre del Usuario-->
-          <p>Nombre del Usuario</p>
+          <p>UTN - FRT</p>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -138,7 +113,7 @@
         <!-- Menú Estadísticas -->
         <li>
           <a href="#!index">
-            <i class="fa fa-area-chart"></i><span>Estadísticas {{2+1}}</span>
+            <i class="fa fa-area-chart"></i><span>Estadísticas</span>
           </a>
         </li>
         <!-- Menú Destinos -->
@@ -170,12 +145,6 @@
             <li><a href="#!listarNovedades"><i class="fa fa-circle-o"></i>Listar</a></li>
             <li><a href="#!crearNovedad"><i class="fa fa-circle-o"></i>Crear Novedad</a></li>
           </ul>
-        </li>
-        <!-- Menú EN VIVO -->
-        <li>
-          <a href="index.html">
-            <i class="fa fa-play"></i><span>En Vivo</span>
-          </a>
         </li>
         <!-- Menú Notificaciones -->
         <li class="treeview">

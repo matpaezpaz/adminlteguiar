@@ -14,7 +14,8 @@ app.factory('Repositorio',function($http){
         enviarNotificacion: enviarNotificacion,
         eliminarDestino: eliminarDestino,
         crearNotificacion: crearNotificacion,
-        getNotificaciones: getNotificaciones
+        getNotificaciones: getNotificaciones,
+        enviarImagen: enviarImagen
     };
     return respositorio;
 
@@ -68,5 +69,9 @@ app.factory('Repositorio',function($http){
     }
     function getNotificaciones(lugar_id) {
         return $http.get(ip + '/lugares/'+lugar_id+'/notificaciones');
+    }
+
+    function enviarImagen(novedad){
+        return $http.post(ip+'/novedades/'+novedad.id+'/imagen', novedad.imagen);
     }
 });

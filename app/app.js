@@ -2,8 +2,8 @@ var app = angular.module('adminLTE', ['ngRoute'])
 app.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl : "pages/login/login.html",
-		controller : "loginPermissions"
+		templateUrl : "pages/index/index.html",
+		controller : "indexController"
 	})
 	.when("/index", {
 		templateUrl : "pages/index/index.html",
@@ -114,6 +114,7 @@ app.controller('loginPermissions', ['$scope','$routeParams','$window', function(
 
 app.controller('gestionarNovedadesController', ['Repositorio', '$scope', '$routeParams','$window', function(Repositorio, $scope, $routeParams,$window){
 
+        var formdata = new FormData();
     if($routeParams.idNovedad){
         $scope.titulo = "Editar Novedad";
         Repositorio.getNovedad($routeParams.idNovedad)
@@ -154,6 +155,20 @@ app.controller('listarNovedadesController', ['$scope','$http','Repositorio', fun
 	    });
 	}
 }]);
+
+app.directive('ngFiles', ['$parse', function ($parse) {
+
+            function fn_link(scope, element, attrs) {
+                var onChange = $parse(attrs.ngFiles);
+                element.on('change', function (event) {
+                    onChange(scope, { $files: event.target.files });
+                });
+            };
+
+            return {
+                link: fn_link
+            }
+        } ])
 
 app.controller('listarNotificacionesController', ['$scope','$http','Repositorio', function($scope,$http, Repositorio){
 	Repositorio.getNotificaciones(1)
@@ -318,23 +333,26 @@ $(function () {
 
   /* Morris.js Charts */
   // Sales chart
-  var area = new Morris.Area({
+  var area = new Morris.Line({
     element   : 'revenue-chart',
     resize    : true,
-    data      : [
-      { y: '2011 Q1', item1: 2666, item2: 2666 },
-      { y: '2011 Q2', item1: 2778, item2: 2294 },
-      { y: '2011 Q3', item1: 4912, item2: 1969 },
-      { y: '2011 Q4', item1: 3767, item2: 3597 },
-      { y: '2012 Q1', item1: 6810, item2: 1914 },
-      { y: '2012 Q2', item1: 5670, item2: 4293 },
-      { y: '2012 Q3', item1: 4820, item2: 3795 },
-      { y: '2012 Q4', item1: 15073, item2: 5967 },
-      { y: '2013 Q1', item1: 10687, item2: 4460 },
-      { y: '2013 Q2', item1: 8432, item2: 5713 }
+    data: [
+        { y: '2017-01', a: 5},
+        { y: '2017-02', a: 521},
+        { y: '2017-03', a: 860},
+        { y: '2017-04', a: 750},
+        { y: '2017-05', a: 506},
+        { y: '2017-06', a: 450},
+        { y: '2017-07', a: 700},
+        { y: '2017-08', a: 620},
+        { y: '2017-09', a: 500},
+        { y: '2017-10', a: 450},
+        { y: '2017-11', a: 400},
+        { y: '2017-12', a: 560}
     ],
     xkey      : 'y',
-    ykeys     : ['item1', 'item2'],
+    xlabel    : 'month',
+    ykeys     : ['a', 'b'],
     labels    : ['Item 1', 'Item 2'],
     lineColors: ['#a0d0e0', '#3c8dbc'],
     hideHover : 'auto'
@@ -343,19 +361,20 @@ $(function () {
     element          : 'line-chart',
     resize           : true,
     data             : [
-      { y: '2011 Q1', item1: 2666 },
-      { y: '2011 Q2', item1: 2778 },
-      { y: '2011 Q3', item1: 4912 },
-      { y: '2011 Q4', item1: 3767 },
-      { y: '2012 Q1', item1: 6810 },
-      { y: '2012 Q2', item1: 5670 },
-      { y: '2012 Q3', item1: 4820 },
-      { y: '2012 Q4', item1: 15073 },
-      { y: '2013 Q1', item1: 10687 },
-      { y: '2013 Q2', item1: 8432 }
+      { y: '2017-12-18 8:00', a: 200},
+      { y: '2017-12-18 9:00', a: 250},
+      { y: '2017-12-18 10:00', a: 300},
+      { y: '2017-12-18 11:00', a: 250},
+      { y: '2017-12-18 12:00', a: 100},
+      { y: '2017-12-18 13:00', a: 90},
+      { y: '2017-12-18 14:00', a: 150},
+      { y: '2017-12-18 15:00', a: 400},
+      { y: '2017-12-18 16:00', a: 350},
+      { y: '2017-12-18 17:00', a: 200},
+      { y: '2017-12-18 18:00', a: 300}
     ],
     xkey             : 'y',
-    ykeys            : ['item1'],
+    ykeys            : ['a'],
     labels           : ['Item 1'],
     lineColors       : ['#efefef'],
     lineWidth        : 2,
@@ -373,11 +392,12 @@ $(function () {
   var donut = new Morris.Donut({
     element  : 'sales-chart',
     resize   : true,
-    colors   : ['#3c8dbc', '#f56954', '#00a65a'],
+    colors   : ['#3c8dbc', '#f56954', '#00a65a','#ffa65a'],
     data     : [
-      { label: 'ASD', value: 65 },
-      { label: 'DFG', value: 30 },
-      { label: 'Mail-Order Sales', value: 20 }
+      { label: 'SAE', value: 65 },
+      { label: 'Oficina de Cultura', value: 31 },
+      { label: 'Oficina de Sistemas', value: 26 },
+      { label: 'Ciencias Básicas', value: 13 }
     ],
     hideHover: 'auto'
   });
@@ -401,5 +421,5 @@ $(function () {
 
 });
 
-}]);
 
+}]);
