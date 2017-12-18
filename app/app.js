@@ -352,9 +352,9 @@ $(function () {
     ],
     xkey      : 'y',
     xlabel    : 'month',
-    ykeys     : ['a', 'b'],
-    labels    : ['Item 1', 'Item 2'],
-    lineColors: ['#a0d0e0', '#3c8dbc'],
+    ykeys     : ['a'],
+    labels    : ['Item 1'],
+    lineColors: ['#3c8dbc'],
     hideHover : 'auto'
   });
   var line = new Morris.Line({
