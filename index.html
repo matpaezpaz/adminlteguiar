@@ -38,12 +38,12 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="height: 100%;" ng-app="adminLTE" ng-controller="loginPermissions">
+<body class="hold-transition skin-blue sidebar-mini" style="height: 100%;" ng-app="adminLTE" >
 <div class="wrapper" style="height: 100%;overflow-y: hidden">
 
 </div>
 <div class="wrapper"  style="height: 100%;overflow-y: hidden">
-  <header class="main-header" ng-if="checkLocalStorage()">
+  <header class="main-header" >
     <!-- Logo -->
     <a href="index.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -119,7 +119,7 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside ng-if="checkLocalStorage()" class="main-sidebar">
+  <aside  class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -198,11 +198,11 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" ng-view style="height: 100%;Overflow-y:hidden" ng-if="checkLocalStorage()">
+  <div class="content-wrapper" ng-view style="height: 100%;Overflow-y:hidden">
 
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer" ng-if="checkLocalStorage()">
+  <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
@@ -211,7 +211,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside  ng-if="checkLocalStorage()" class="control-sidebar control-sidebar-dark">
+  <aside   class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
