@@ -28,28 +28,17 @@
                         <!-- Título -->
                         <div class="form-group">
                             <label for="titulo">Título</label>
-                            <input type="textarea" class="form-control" id="titulo"ng-model="Destino.nombre" placeholder="Ingrese el título de la notificación">
-                        </div>
-                        <!-- Date -->
-                        <div class="form-group">
-                            <label>Fecha:</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control pull-right" ng-model="notificacion.fecha">
-                            </div>
-                            <!-- /.input group -->
+                            <input type="textarea" class="form-control" id="titulo"ng-model="n.titulo" placeholder="Ingrese el título de la notificación">
                         </div>
                         <!-- /.form group -->
                         <div class="form-group">
                             <label>Descripción</label>
-                            <textarea class="form-control" rows="3" placeholder="Descripción..."></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Descripción..." ng-model="n.mensaje"></textarea>
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" ng-click="crearNotificacion(n)">Guardar</button>
                         </div>
                     </div>
                 </form>

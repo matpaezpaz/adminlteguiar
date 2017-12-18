@@ -38,14 +38,17 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="height: 100%;" ng-app="adminLTE">
+<body class="hold-transition skin-blue sidebar-mini" style="height: 100%;" ng-app="adminLTE" ng-controller="loginPermissions">
 <div class="wrapper" style="height: 100%;overflow-y: hidden">
-  <header class="main-header">
+
+</div>
+<div class="wrapper"  style="height: 100%;overflow-y: hidden">
+  <header class="main-header" ng-if="checkLocalStorage()">
     <!-- Logo -->
     <a href="index.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <!-- $%# Agregar logo de aplicación para que se muestre cuando minimizo el menú de la izquierda -->
-      <span class="logo-mini">AAA</b></span>
+      <span class="logo-mini">GuiAR</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">Gui<b>AR</b></span>
     </a>
@@ -116,7 +119,7 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside ng-if="checkLocalStorage()" class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -151,7 +154,6 @@
             <!-- $%# Reemplazar URL de cada operación -->
             <li><a href="#!listarDestinos"><i class="fa fa-circle-o"></i>Listar</a></li>
             <li><a href="#!crearDestino"><i class="fa fa-circle-o"></i>Crear Destino</a></li>
-            <li><a href="#!editarDestino"><i class="fa fa-circle-o"></i>Modificar Destino</a></li>
           </ul>
         </li>
         <!-- Menú Novedades -->
@@ -167,7 +169,6 @@
             <!-- $%# Reemplazar URL de cada operación -->
             <li><a href="#!listarNovedades"><i class="fa fa-circle-o"></i>Listar</a></li>
             <li><a href="#!crearNovedad"><i class="fa fa-circle-o"></i>Crear Novedad</a></li>
-            <li><a href="#!editarNovedad"><i class="fa fa-circle-o"></i>Modificar Novedad</a></li>
           </ul>
         </li>
         <!-- Menú EN VIVO -->
@@ -197,11 +198,11 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" ng-view style="height: 100%;Overflow-y:hidden">
+  <div class="content-wrapper" ng-view style="height: 100%;Overflow-y:hidden" ng-if="checkLocalStorage()">
 
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  <footer class="main-footer" ng-if="checkLocalStorage()">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
@@ -210,7 +211,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  <aside  ng-if="checkLocalStorage()" class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -447,7 +448,9 @@
 <!-- AngularRoute -->
 <script src="angular/angular-route.js"></script>
 <!-- Angular App -->
+
 <script src="app/app.js"></script>
+<script src="app/factory.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 
 </body>

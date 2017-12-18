@@ -26,19 +26,20 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>Usuario</th>
-                            <th>Fecha de creación</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Fecha de creación</th>
                             <th></th>
                         </tr>
                         <tr ng-repeat="d in destinos">
-                            <td style="vertical-align: middle">{{d.usuario}}</td>
-                            <td style="vertical-align: middle">{{d.fechapublicacion}}</td>
-                            <td style="vertical-align: middle">{{d.titulo}}</td>
+                            <td style="vertical-align: middle">{{d.nombre}}</td>
                             <td style="vertical-align: middle">{{d.descripcion}}</td>
+                            <td style="vertical-align: middle">{{d.created_at | date:"dd/MM/yyyy"}}</td>
                             <td style="vertical-align: middle">
-                                <button class="btn btn-sm btn-danger" style="border-radius: 999px">
+                                <a href="#!editarDestino/{{d.id}}" class="btn btn-sm btn-success" style="border-radius: 999px">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                                <button class="btn btn-sm btn-danger" style="border-radius: 999px" ng-click="eliminarDestino(d.id)">
                                     <i class="ion-close" aria-hidden="true"></i>
                                 </button>
                             </td>

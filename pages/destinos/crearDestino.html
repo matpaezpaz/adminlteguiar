@@ -13,7 +13,7 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Registrar un destino</h3>
+                    <h3 class="box-title">{{titulo}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -29,25 +29,25 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nombre</label>
-                            <input type="textarea" class="form-control" ng-model="Destino.nombre" placeholder="Ingrese el nombre">
+                            <input type="textarea" class="form-control" ng-model="Destino.nombre" placeholder="Ingrese el nombre" >
                         </div>
                         <div class="form-group">
                             <label>Descripción</label>
-                            <textarea class="form-control" rows="3" placeholder="Descripción..."></textarea>
+                            <textarea class="form-control" rows="3" placeholder="Descripción..." ng-model="Destino.descripcion"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Coordenada X</label>
-                            <input type="text" class="form-control" ng-model="Destino.latitud" placeholder="Ingrese la coordenada X">
+                            <input type="text" class="form-control" ng-model="Destino.x" ng-disabled="editando" placeholder="Ingrese la coordenada X" >
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Coordenada Y</label>
-                            <input type="text" class="form-control" ng-model="Destino.longitud" placeholder="Ingrese la coordenada Y">
+                            <input type="text" class="form-control" ng-model="Destino.y" ng-disabled="editando" placeholder="Ingrese la coordenada Y">
                         </div>
                     </div>
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary" ng-click="guardar(Destino)">Guardar</button>
                     </div>
                 </form>
             </div>

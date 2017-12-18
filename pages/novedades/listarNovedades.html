@@ -11,33 +11,26 @@
                 <div class="box-header">
                     <h3 class="box-title">Lista de novedades</h3>
 
-                    <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
                             <th>Fecha de publicación</th>
-                            <th>Usuario</th>
-                            <th>Título</th>
                             <th>Descripción</th>
+                            <th></th>
                             <th></th>
                         </tr>
                         <tr ng-repeat="d in novedades">
-                            <td style="vertical-align: middle">{{d.fechapublicacion}}</td>
-                            <td style="vertical-align: middle">{{d.usuario}}</td>
-                            <td style="vertical-align: middle">{{d.titulo}}</td>
+                            <td style="vertical-align: middle">{{d.fecha | date:"dd/MM/yyyy"}}</td>
                             <td style="vertical-align: middle">{{d.descripcion}}</td>
                             <td style="vertical-align: middle">
-                                <button class="btn btn-sm btn-danger" style="border-radius: 999px">
+                                <a href="#!editarNovedad/{{d.id}}" class="btn btn-sm btn-success" style="border-radius: 999px">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                            <td style="vertical-align: middle">
+                                <button class="btn btn-sm btn-danger" style="border-radius: 999px" ng-click="eliminar(d.id)">
                                     <i class="ion-close" aria-hidden="true"></i>
                                 </button>
                             </td>

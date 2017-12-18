@@ -11,32 +11,19 @@
                 <div class="box-header">
                     <h3 class="box-title">Historial de Notificaciones</h3>
 
-                    <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
-                        <tr>
-                            <th>Usuario</th>
-                            <th>Fecha de difusión</th>
+                        <thead>
+                            <th class="text-center">Fecha de creación</th>
                             <th>Título</th>
-                            <th>Estado</th>
-                            <th>Descripción</th>
-                        </tr>
-                        <tr>
-                            <td>Usuario</td>
-                            <td>11-7-2014</td>
-                            <td>Acto de egresados</td>
-                            <td><span class="label label-warning">En proceso</span></td>
-                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            <th>Mensaje</th>
+                        </thead>
+                        <tr ng-repeat="n in notificaciones">
+                            <td class="text-center">{{n.fecha | date:"dd/MM/yyyy"}}</td>
+                            <td>{{n.titulo}}</td>
+                            <td>{{n.mensaje}}</td>
                         </tr>
                     </table>
                 </div>

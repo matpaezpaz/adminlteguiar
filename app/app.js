@@ -2,8 +2,8 @@ var app = angular.module('adminLTE', ['ngRoute'])
 app.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl : "pages/index/index.html",
-		controller : "indexController"
+		templateUrl : "pages/login/login.html",
+		controller : "loginPermissions"
 	})
 	.when("/index", {
 		templateUrl : "pages/index/index.html",
@@ -14,94 +14,177 @@ app.config(function($routeProvider) {
 		controller: "destinosController"
 	})
 	.when("/crearDestino", {
-		templateUrl : "pages/destinos/crearDestino.html"
+		templateUrl : "pages/destinos/crearDestino.html",
+		controller: "gestionarDestinosController"
 	})
-	.when("/editarDestino", {
-		templateUrl : "pages/destinos/editarDestino.html"
+	.when("/editarDestino/:idDestino", {
+		templateUrl : "pages/destinos/crearDestino.html",
+		controller: "gestionarDestinosController"
 	})
 	.when("/listarNovedades", {
 		templateUrl : "pages/novedades/listarNovedades.html",
 		controller : "listarNovedadesController"
 	})
 	.when("/crearNovedad", {
-		templateUrl : "pages/novedades/crearNovedad.html"
+		templateUrl : "pages/novedades/crearNovedad.html",
+		controller: "gestionarNovedadesController"
 	})
-	.when("/editarNovedad", {
-		templateUrl : "pages/novedades/editarNovedad.html"
+	.when("/editarNovedad/:idNovedad", {
+		templateUrl : "pages/novedades/crearNovedad.html",
+		controller: "gestionarNovedadesController"
 	})
 	.when("/listarNotificaciones", {
-		templateUrl : "pages/notificaciones/listarNotificaciones.html"
+		templateUrl : "pages/notificaciones/listarNotificaciones.html",
+		controller : "listarNotificacionesController"
 	})
 	.when("/crearNotificacion", {
-		templateUrl : "pages/notificaciones/crearNotificacion.html"
+		templateUrl : "pages/notificaciones/crearNotificacion.html",
+		controller: "crearNotificacionController"
 	})
 	.otherwise({
 		templateUrl : "pages/examples/404.html"
 	});
 });
 
-app.controller('destinosController', ['$scope','$http', function($scope,$http){
-	$scope.destinos = [
-		{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'Oficina de Cultura',
-			descripcion:'descrip1'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'Oficina de Sistemas',
-			descripcion:'descrip2'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'Deptarmento Sistemas',
-			descripcion:'descrip3'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'SAE',
-			descripcion:'descrip4'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'titulo5',
-			descripcion:'descrip5'
-		},
-	];
+app.controller('destinosController', ['Repositorio', '$scope','$http', function(Repositorio,$scope,$http){
+    function cargarDestinos(){
+        Repositorio.getDestinosId(1)
+        .then(function(resp){
+            $scope.destinos = resp.data;
+        });
+    }
+    cargarDestinos();
+
+    $scope.eliminarDestino = function(id){
+        Repositorio.eliminarDestino(id)
+        .then(function(resp){
+            if(resp.status == 200){
+                cargarDestinos();
+            }
+        });
+    }
+}]);
+
+app.controller('gestionarDestinosController', ['Repositorio', '$scope', '$routeParams', '$window', function(Repositorio, $scope, $routeParams, $window){
+    $scope.editando = 0;
+    if($routeParams.idDestino){
+        $scope.editando = 1;
+        $scope.titulo = "Editar destino";
+        Repositorio.getDestino($routeParams.idDestino)
+        .then(function(resp){
+            $scope.Destino = resp.data;
+        })
+    } else {
+        $scope.titulo = "Crear destino";
+    }
+
+    $scope.guardar = function(destino){
+        console.log('hola?');
+        destino.lugar_id = "1";
+        if($scope.editando == 1){
+            Repositorio.editarDestino($routeParams.idDestino,destino)
+            .then(function(resp){
+                            $window.location.href = '#!listarDestinos';
+                        });
+        } else {
+            Repositorio.crearDestino(destino)
+            .then(function(resp){
+                $window.location.href = '#!listarDestinos';
+            });
+        }
+    }
+}]);
+
+app.controller('loginPermissions', ['$scope','$routeParams','$window', function($scope,$routeParams,$window){
+    var usuario = 'administrator';
+    var password = '123';
+    $scope.logueado = false;
+
+    $scope.checkLocalStorage = function(){
+        return localStorage.getItem('logueado') == true;
+    }
+
+    $scope.login = function(user,pass){
+        if(user == usuario && pass == password) {
+            localStorage.setItem('logueado', true);
+            $window.location.href = '#!index';
+        }
+    }
+}]);
+
+app.controller('gestionarNovedadesController', ['Repositorio', '$scope', '$routeParams','$window', function(Repositorio, $scope, $routeParams,$window){
+
+    if($routeParams.idNovedad){
+        $scope.titulo = "Editar Novedad";
+        Repositorio.getNovedad($routeParams.idNovedad)
+        .then(function(resp){
+            $scope.novedad = resp.data;
+        })
+    } else {
+        $scope.titulo = "Crear Novedad";
+    }
+    $scope.guardar = function(novedad){
+        if($routeParams.idNovedad) {
+            Repositorio.editarNovedad($routeParams.idNovedad, novedad)
+            .then(function(resp){
+                $window.location.href = "#!listarNovedades"
+            })
+        } else {
+            novedad.lugar_id = 1;
+            Repositorio.crearNovedad(novedad)
+            .then(function(resp){
+                $window.location.href = "#!listarNovedades"
+            })
+        }
+    }
+}]);
+
+app.controller('listarNovedadesController', ['$scope','$http','Repositorio', function($scope,$http, Repositorio){
+	function cargarNovedades(){
+        Repositorio.getNovedades(1)
+        .then(function(resp){
+            $scope.novedades = resp.data;
+        });
+	}
+	cargarNovedades();
+	$scope.eliminar = function(id){
+	    Repositorio.eliminarNovedad(id)
+	    .then(function(resp){
+	        cargarNovedades()
+	    });
+	}
+}]);
+
+app.controller('listarNotificacionesController', ['$scope','$http','Repositorio', function($scope,$http, Repositorio){
+	Repositorio.getNotificaciones(1)
+	.then(function(resp){
+	    $scope.notificaciones = resp.data;
+	});
 }]);
 
 
-app.controller('listarNovedadesController', ['$scope','$http', function($scope,$http){
-	$scope.novedades = [
-		{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'Oficina de Cultura',
-			descripcion:'descrip1'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'Oficina de Sistemas',
-			descripcion:'descrip2'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'Deptarmento Sistemas',
-			descripcion:'descrip3'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'SAE',
-			descripcion:'descrip4'
-		},{
-			fechapublicacion:'24/11/2017',
-			usuario:'ella',
-			titulo:'titulo5',
-			descripcion:'descrip5'
-		},
-	];
+app.controller('crearNotificacionController', ['$scope','$http','Repositorio', '$window', function($scope,$http, Repositorio, $window){
+    $scope.crearNotificacion = function(n){
+        //objeto n. en la vista. tiene titulo, fecha y descripcion
+        hoy = new Date();
+        n.fecha = ''+hoy.getDate()+'/'+(hoy.getMonth()+1)+'/'+hoy.getFullYear();
+        n.lugar_id = 1;
+        Repositorio.enviarNotificacion(n)
+        .then(function(resp){
+            if(resp.status == 200){
+                //agregar insert a franco
+                alert('Notificación enviada exitosamente');
+                Repositorio.crearNotificacion(n).then(function(resp){
+                    if(resp.status == 200) {
+                        console.log('yes')
+                    }
+                })
+                $window.location.href = '#!listarNotificaciones';
+            }
+        });
+    }
 }]);
+
 app.controller('indexController', ['$scope','$http', function($scope,$http){
 	$scope.fechaHoy = new Date().getDate();
 	$scope.visitasDiarias = 28;
@@ -319,3 +402,4 @@ $(function () {
 });
 
 }]);
+
